@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> </head>
+  <body>
+    <h1>Hello World!</h1>
+    <div id="future"></div>
+    <form id="form" id="chat_form"><input id="chat_input" type="text" /> <input type="submit" value="Send" /></form>
+    <script src="http://localhost:3007/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect("http://localhost:3007");
+      socket.on("connect", function(data) {
+        socket.emit("join", "Hello World from client");
+      });
+      socket.on("new-telemetry", function(data) {
+        console.log("TELEMETRY:", data);
+      });
+    </script>
+  </body>
+</html>
