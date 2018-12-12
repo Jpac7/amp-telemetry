@@ -8,6 +8,7 @@
     "lint": "eslint src/**/*.{js,jsx}",
     "api-dev": "npx nodemon src/api/index.js",
     "client-dev": "parcel src/client/index.html",
+    "dev": "npm run api-dev && npm run client-dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

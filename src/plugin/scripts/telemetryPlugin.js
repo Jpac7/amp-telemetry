@@ -76,20 +76,26 @@
     };
 
     var playerStats = {
-      state: false,
+      bufferingState: false,
       startTime: 0,
       totalTime: 0,
       bufferSum: 0,
       bufferCount: 0,
       handleWaiting: function() {
         this.startTime = Date.now();
-        this.state = true;
+        this.bufferingState = true;
       },
       handlePlaying: function() {
-        if (this.state) {
+        if (this.bufferingState) {
           this.totalTime += Date.now() - this.startTime;
-          this.state = false;
+          this.bufferingState = false;
         }
+      },
+      getBufferingDuration: function() {
+        if (this.bufferingState) {
+          return Date.now() - this.startTime;
+        }
+        return this.totalTime;
       },
       addBufferLevel: function(buffer) {
         this.bufferSum += buffer;
@@ -99,7 +105,7 @@
         return (this.bufferSum * 1000) / this.bufferCount || 0;
       },
       restart: function() {
-        if (this.state) {
+        if (this.bufferingState) {
           this.startTime = Date.now();
         } else {
           this.startTime = 0;
@@ -155,7 +161,7 @@
         },
         player: {
           statistics: {
-            bufferingTime: playerStats.totalTime,
+            bufferingTime: playerStats.getBufferingDuration(),
             avgBuffer: playerStats.calculateAvgBuffer()
           },
           events: {
@@ -171,17 +177,13 @@
         }
       };
     };
-    var setupListeners = function() {
-      // send data when page is closed or hided
-      window.addEventListener("onbeforeunload", exit, false);
-      window.addEventListener("pagehide", exit, false);
 
-      player.addEventListener(amp.eventName.disposing, function() {
-        console.log("PLAYer DISPOSING");
-        exit();
-      });
+    var setupListeners = function() {
+      // send data when page is closed by the user, on every browser.
+      window.addEventListener("onbeforeunload", exit, false);
 
       player.addEventListener(amp.eventName.loadedmetadata, handleMetadata);
+      player.addEventListener(amp.eventName.disposing, exit);
       player.addEventListener(amp.eventName.error, function() {
         playerErrors.handleError();
       });
@@ -250,6 +252,8 @@
         streamHistory.handleSubtitleChanged();
       });
 
+      // Creating and assigning the StreamInfo object.
+      //It only runs one time during the plugin lifecycle.
       streamInfo = {
         manifestUrl: this.currentSrc(),
         protocol: this.currentType(),
@@ -271,6 +275,7 @@
     var init = function() {
       console.log("plugin telemetry initialized with player ", player);
 
+      // Getting a timestamp useful to identify this video streaming instance
       startedOn = Date.now();
 
       setupListeners();
@@ -279,7 +284,7 @@
         // create data object
         var data = createTelemetryObj();
 
-        // upload to server
+        // upload to server. When it fails, retries more 20 times.
         uploadData(data);
 
         // Cleanup data
@@ -290,7 +295,6 @@
     };
 
     var exit = function() {
-      console.log("EXIT");
       clearInterval(intervalId);
       uploadData(createTelemetryObj());
     };
@@ -299,11 +303,11 @@
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200 && JSON.parse(xhr.responseText).status) {
-          console.log("upload success!");
+          console.log("upload success:", data);
         } else {
           retries = retries ? --retries : 20;
           if (retries > 0) {
-            setTimeout(200, function() {
+            setTimeout(100, function() {
               uploadData(data, retries);
             });
           }

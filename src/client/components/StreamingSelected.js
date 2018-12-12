@@ -15,7 +15,7 @@ const StreamingSelected = ({ selected }) => {
           <h4 className="mb-3 bg-dark text-light p-2">Streaming information</h4>
           <StreamingInfo info={selected.stream.info} />
           <hr />
-          <h4 className="mb-3 mt-3 bg-dark text-light p-2">Last period telemetry</h4>
+          <h4 className="mb-3 mt-3 bg-dark text-light p-2">Last period measurements</h4>
           <h5>Video Download</h5>
           <DownloadTable history={selected.stream.history.video} />
           <h5>Audio Download</h5>

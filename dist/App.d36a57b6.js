@@ -24699,7 +24699,7 @@ var StreamingSelected = function StreamingSelected(_ref) {
     info: selected.stream.info
   }), _react.default.createElement("hr", null), _react.default.createElement("h4", {
     className: "mb-3 mt-3 bg-dark text-light p-2"
-  }, "Last period telemetry"), _react.default.createElement("h5", null, "Video Download"), _react.default.createElement(_DownloadTable.default, {
+  }, "Last period measurements"), _react.default.createElement("h5", null, "Video Download"), _react.default.createElement(_DownloadTable.default, {
     history: selected.stream.history.video
   }), _react.default.createElement("h5", null, "Audio Download"), _react.default.createElement(_DownloadTable.default, {
     history: selected.stream.history.audio
@@ -24865,7 +24865,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53088" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58520" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
