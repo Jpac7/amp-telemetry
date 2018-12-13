@@ -6,7 +6,9 @@ The architectural pieces of the solution are represented in the following diagra
 
 ![picture](assets/Architecture.PNG)
 
-## Prerequisites
+## Getting Started
+
+### Prerequisites
 
 What software is needed to run this project:
   * NodeJS and NPM (https://nodejs.org/)
@@ -15,7 +17,7 @@ What software is needed to run this project:
 To manage the stored data I've been using:
   *Studio 3T free trial (https://studio3t.com/)
   
-### Getting Started
+### Instructions
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. This project has no automated tests or deployment builds and artifacts.
 
@@ -37,6 +39,7 @@ These instructions will get you a copy of the project up and running on your loc
  6. Use a mongoDB GUI client (like 'studio 3t') to check the data collected in the db (Db:'amp', Collection: 'streamings').
 
 ## Some remarks
+
  - The plugin was written using ES5 features to avoid an extra transpilling phase.
  - The telemetries default period is 30 seconds, but can be configured manually in the plugin options (src/plugin/index.html). Currently is manually set to 20sec.
  - I'm capturing the first bitrate in the bitrates switches, when the playing begins.
@@ -46,12 +49,14 @@ These instructions will get you a copy of the project up and running on your loc
  ## Images
  
  DB structure
+
 ![picture](assets/Db.PNG)
 
 Visualization client
-![picture](assets/Client app.PNG)
-![picture](assets/Client app 2.PNG)
-![picture](assets/Client app 3.PNG)
+
+![picture](assets/Client&nbspapp.PNG)
+![picture](assets/Client&nbspapp&nbsp2.PNG)
+![picture](assets/Client&nbspapp&nbsp3.PNG)
 
 
 
