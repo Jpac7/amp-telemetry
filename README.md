@@ -31,7 +31,7 @@ git clone git@github.com:Jpac7/amp-telemetry.git
 npm install
 ```
  
-3. Run the API (port 3007):
+3. Run the API:
 ```
 npm run api-dev
 ```
@@ -43,10 +43,7 @@ npm run api-dev
 npm run client-dev 
 ```
 
-6. Open the client in your browser: 
-```
-[http://localhost:1234](http://localhost:1234)
-```
+6. Open the client in your browser: [http://localhost:1234](http://localhost:1234)
  
 7. Use a mongoDB GUI client (like 'studio 3t') to check the data collected in the db (Db:'amp', Collection: 'streamings').
 
@@ -64,10 +61,13 @@ npm run client-dev
 
 ![picture](assets/Db.PNG)
 
+
 Client visualizing received telemetries
 
 ![picture](assets/ClientApp.PNG)
+
 ![picture](assets/ClientApp2.PNG)
+
 ![picture](assets/ClientApp3.PNG)
 
 
