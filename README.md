@@ -59,6 +59,7 @@ npm run client-dev
 - The telemetries default period is 30 seconds, but can be configured manually in the plugin options (src/plugin/index.html). Currently is manually set to 20sec.
 - I'm starting the telemetry data collection as soon as the plugin is loaded and finishing when the 'ended' event is triggered.
 - I'm capturing the first bitrate in the bitrates switches, when the playing begins.
+- If the page is closed by the user, the existing information is sent before to the server on the 'onbeforeunload' window event callback.
 - The telemetries objects are sent to a rest API, which sent them in real-time to all connected clients for visualization through socket.IO and saves them in the db. There is also an endpoint to retrive the telemetries but actually it isn't being used.
 - There is a ReactJS client that can visualize the received telemetries in real-time from all video streamings happening. This client can also have multiple open instances.
 
