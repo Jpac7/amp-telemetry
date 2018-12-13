@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { formatTimestamp } from "../utils/dateUtils";
 
 class StartedOnListItem extends Component {
   constructor(props) {
     super(props);
-    const startedOnFormatted = new Date(props.startedOn);
     this.state = {
-      tabDate: `${startedOnFormatted.getHours()}:${startedOnFormatted.getMinutes()}:${startedOnFormatted.getSeconds()}`
+      tabDate: formatTimestamp(new Date(props.startedOn))
     };
   }
 

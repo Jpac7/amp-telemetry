@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { formatTimestamp } from "../utils/dateUtils";
 
 class EventsTable extends Component {
   render() {
@@ -18,7 +19,10 @@ class EventsTable extends Component {
                   <th scope="row">{event || "-"}</th>
                   <td>
                     {timestamps.length
-                      ? timestamps.map((ts, index) => `${ts}${index !== timestamps.length - 1 ? ", " : ""}`)
+                      ? timestamps.map(
+                          (ts, index) =>
+                            `${formatTimestamp(new Date(ts))}${index !== timestamps.length - 1 ? ", " : ""}`
+                        )
                       : "-"}
                   </td>
                 </tr>

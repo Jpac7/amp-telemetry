@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { formatTimestamp } from "../utils/dateUtils";
 
 class ErrorsTable extends Component {
   render() {
@@ -17,7 +18,7 @@ class ErrorsTable extends Component {
                 return (
                   <tr key={`${id}${timestamp}`}>
                     <th scope="row">{id || "-"}</th>
-                    <td>{timestamp || "-"}</td>
+                    <td>{formatTimestamp(new Date(timestamp)) || "-"}</td>
                   </tr>
                 );
               })

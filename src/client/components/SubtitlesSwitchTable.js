@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { formatTimestamp } from "../utils/dateUtils";
 
 class SubtitlesSwitch extends Component {
   render() {
@@ -16,7 +17,7 @@ class SubtitlesSwitch extends Component {
               Object.entries(this.props.history).map(([key, { language, timestamp }]) => (
                 <tr key={`${language}${key}`}>
                   <th scope="row">{language || "-"}</th>
-                  <td>{timestamp || "-"}</td>
+                  <td>{formatTimestamp(new Date(timestamp)) || "-"}</td>
                 </tr>
               ))
             ) : (

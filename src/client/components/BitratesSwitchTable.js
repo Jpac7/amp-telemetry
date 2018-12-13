@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { formatTimestamp } from "../utils/dateUtils";
 
 class BitratesSwitch extends Component {
   render() {
@@ -16,7 +17,7 @@ class BitratesSwitch extends Component {
               Object.entries(this.props.history).map(([key, { bitrate, timestamp }]) => (
                 <tr key={`${bitrate}${key}`}>
                   <th scope="row">{bitrate || "-"}</th>
-                  <td>{timestamp || "-"}</td>
+                  <td>{formatTimestamp(new Date(timestamp)) || "-"}</td>
                 </tr>
               ))
             ) : (

@@ -24030,7 +24030,28 @@ var Navbar = function Navbar() {
 
 var _default = Navbar;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/StartedOnListItem.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js"}],"utils/dateUtils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatTimestamp = void 0;
+
+var formatTimestamp = function formatTimestamp(date) {
+  return "".concat(correctDigit(date.getHours()), ":").concat(correctDigit(date.getMinutes()), ":").concat(correctDigit(date.getSeconds()));
+};
+
+exports.formatTimestamp = formatTimestamp;
+
+function correctDigit(digit) {
+  if (digit < 10) {
+    return "0".concat(digit);
+  }
+
+  return digit;
+}
+},{}],"components/StartedOnListItem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24039,6 +24060,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _dateUtils = require("../utils/dateUtils");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -24071,9 +24094,8 @@ function (_Component) {
     _classCallCheck(this, StartedOnListItem);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(StartedOnListItem).call(this, props));
-    var startedOnFormatted = new Date(props.startedOn);
     _this.state = {
-      tabDate: "".concat(startedOnFormatted.getHours(), ":").concat(startedOnFormatted.getMinutes(), ":").concat(startedOnFormatted.getSeconds())
+      tabDate: (0, _dateUtils.formatTimestamp)(new Date(props.startedOn))
     };
     return _this;
   }
@@ -24102,7 +24124,7 @@ function (_Component) {
 
 var _default = StartedOnListItem;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/StreamingsList.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","../utils/dateUtils":"utils/dateUtils.js"}],"components/StreamingsList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24302,6 +24324,8 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _dateUtils = require("../utils/dateUtils");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -24365,7 +24389,7 @@ function (_Component) {
           key: "".concat(bitrate).concat(key)
         }, _react.default.createElement("th", {
           scope: "row"
-        }, bitrate || "-"), _react.default.createElement("td", null, timestamp || "-"));
+        }, bitrate || "-"), _react.default.createElement("td", null, (0, _dateUtils.formatTimestamp)(new Date(timestamp)) || "-"));
       }) : _react.default.createElement("tr", null, _react.default.createElement("th", {
         scope: "row"
       }, "-"), _react.default.createElement("td", null, "-")))));
@@ -24377,7 +24401,7 @@ function (_Component) {
 
 var _default = BitratesSwitch;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/SubtitlesSwitchTable.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","../utils/dateUtils":"utils/dateUtils.js"}],"components/SubtitlesSwitchTable.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24386,6 +24410,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _dateUtils = require("../utils/dateUtils");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -24450,7 +24476,7 @@ function (_Component) {
           key: "".concat(language).concat(key)
         }, _react.default.createElement("th", {
           scope: "row"
-        }, language || "-"), _react.default.createElement("td", null, timestamp || "-"));
+        }, language || "-"), _react.default.createElement("td", null, (0, _dateUtils.formatTimestamp)(new Date(timestamp)) || "-"));
       }) : _react.default.createElement("tr", null, _react.default.createElement("th", {
         scope: "row"
       }, "-"), _react.default.createElement("td", null, "-")))));
@@ -24462,7 +24488,7 @@ function (_Component) {
 
 var _default = SubtitlesSwitch;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/BufferingTable.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","../utils/dateUtils":"utils/dateUtils.js"}],"components/BufferingTable.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24504,6 +24530,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _dateUtils = require("../utils/dateUtils");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -24568,7 +24596,7 @@ function (_Component) {
           key: "".concat(id).concat(timestamp)
         }, _react.default.createElement("th", {
           scope: "row"
-        }, id || "-"), _react.default.createElement("td", null, timestamp || "-"));
+        }, id || "-"), _react.default.createElement("td", null, (0, _dateUtils.formatTimestamp)(new Date(timestamp)) || "-"));
       }) : _react.default.createElement("tr", null, _react.default.createElement("th", {
         scope: "row"
       }, "-"), _react.default.createElement("td", null, "-")))));
@@ -24580,7 +24608,7 @@ function (_Component) {
 
 var _default = ErrorsTable;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/EventsTable.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","../utils/dateUtils":"utils/dateUtils.js"}],"components/EventsTable.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24589,6 +24617,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
+
+var _dateUtils = require("../utils/dateUtils");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -24652,7 +24682,7 @@ function (_Component) {
         }, _react.default.createElement("th", {
           scope: "row"
         }, event || "-"), _react.default.createElement("td", null, timestamps.length ? timestamps.map(function (ts, index) {
-          return "".concat(ts).concat(index !== timestamps.length - 1 ? ", " : "");
+          return "".concat((0, _dateUtils.formatTimestamp)(new Date(ts))).concat(index !== timestamps.length - 1 ? ", " : "");
         }) : "-"));
       }))));
     }
@@ -24663,7 +24693,7 @@ function (_Component) {
 
 var _default = EventsTable;
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js"}],"components/StreamingSelected.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","../utils/dateUtils":"utils/dateUtils.js"}],"components/StreamingSelected.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24865,7 +24895,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58520" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49599" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
